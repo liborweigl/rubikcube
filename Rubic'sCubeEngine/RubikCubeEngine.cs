@@ -11,12 +11,14 @@ namespace RubikCubeEngine
 
         private ICubeCreator CubeCreator;
         private IPrintService PrintService;
+        private IFaceEdgeRotatorOperator FaceEdgeRotatorOperator;
 
 
         public RubikCubeEngine()
         {
             PrintService = new PrintService();
             CubeCreator = new CubeCreator();
+            FaceEdgeRotatorOperator = new FaceEdgeRotatorOperator();
 
             rubikCubeConfigurationState = CubeCreator.Create();
 
@@ -26,6 +28,7 @@ namespace RubikCubeEngine
         {
             PrintService = new PrintService();
             CubeCreator = new CubeCreator();
+            FaceEdgeRotatorOperator = new FaceEdgeRotatorOperator();
 
             rubikCubeConfigurationState = CubeCreator.Create(FaceSize, matrixSize);
         }
@@ -80,97 +83,23 @@ namespace RubikCubeEngine
             switch (cubeFace)
             {
                 case CubeFace.Front:
-                    RotateFrontFaceEdges();
+                    FaceEdgeRotatorOperator.RotateFrontFaceEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Bottom:
-                    RotateBottomEdges();
+                    FaceEdgeRotatorOperator.RotateBottomEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Left:
-                    RotateLeftEdges();
+                    FaceEdgeRotatorOperator.RotateLeftEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Right:
-                    RotateRightEdges();
+                    FaceEdgeRotatorOperator.RotateRightEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Up:
-                    RotateUpEdges();
+                    FaceEdgeRotatorOperator.RotateUpEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Down:
-                    RotateDownEdges();
+                    FaceEdgeRotatorOperator.RotateDownEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
-            }
-        }
-
-        private void RotateFrontFaceEdges()
-        {
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Up, MatrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Up, MatrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Left, MatrixSize - 1 - i, MatrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Left, MatrixSize - 1 - i, MatrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, 0, MatrixSize - 1 - i];
-                rubikCubeConfigurationState[(int)CubeFace.Down, 0, MatrixSize - 1 - i] = rubikCubeConfigurationState[(int)CubeFace.Right, i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Right, i, 0] = temp;
-            }
-        }
-
-        private void RotateUpEdges()
-        {
-
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Left, 0, i];
-                rubikCubeConfigurationState[(int)CubeFace.Left, 0, i] = rubikCubeConfigurationState[(int)CubeFace.Front, 0, i];
-                rubikCubeConfigurationState[(int)CubeFace.Front, 0, i] = rubikCubeConfigurationState[(int)CubeFace.Right, 0, i];
-                rubikCubeConfigurationState[(int)CubeFace.Right, 0, i] = rubikCubeConfigurationState[(int)CubeFace.Bottom, 0, i];
-                rubikCubeConfigurationState[(int)CubeFace.Bottom, 0, i] = temp;
-            }
-        }
-
-        private void RotateDownEdges()
-        {
-
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Bottom, MatrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Bottom, MatrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Right, MatrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Right, MatrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Front, MatrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Front, MatrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Left, MatrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Left, MatrixSize - 1, i] = temp;
-            }
-        }
-
-        private void RotateBottomEdges()
-        {
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Left, i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Left, i, 0] = rubikCubeConfigurationState[(int)CubeFace.Up, 0, MatrixSize - 1 - i];
-                rubikCubeConfigurationState[(int)CubeFace.Up, 0, MatrixSize - 1 - i] = rubikCubeConfigurationState[(int)CubeFace.Right, MatrixSize - 1 - i, MatrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Right, MatrixSize - 1 - i, MatrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, MatrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Down, MatrixSize - 1, i] = temp;
-            }
-        }
-
-        private void RotateLeftEdges()
-        {
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Bottom, i, MatrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Bottom, i, MatrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, MatrixSize - 1 - i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Down, MatrixSize - 1 - i, 0] = rubikCubeConfigurationState[(int)CubeFace.Front, MatrixSize - 1 - i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Front, MatrixSize - 1 - i, 0] = rubikCubeConfigurationState[(int)CubeFace.Up, MatrixSize - 1 - i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Up, MatrixSize - 1 - i, 0] = temp;
-            }
-        }
-
-        private void RotateRightEdges()
-        {
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Bottom, MatrixSize - 1 - i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Bottom, MatrixSize - 1 - i, 0] = rubikCubeConfigurationState[(int)CubeFace.Up, i, MatrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Up, i, MatrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Front, i, MatrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Front, i, MatrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, i, MatrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Down, i, MatrixSize - 1] = temp;
             }
         }
 
@@ -178,9 +107,7 @@ namespace RubikCubeEngine
         public void PrintRubikCube()
         {
             PrintService.PrintRubikCubeDefinitionAsTable(rubikCubeConfigurationState, MatrixSize);
-
         }
-
 
 
     }
