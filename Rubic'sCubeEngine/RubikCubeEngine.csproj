@@ -2,9 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>Rubic_sCubeEngine</RootNamespace>
+    <RootNamespace>RubikCubeEngine</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+  
   </PropertyGroup>
-
+  <ItemGroup>
+    <InternalsVisibleTo Include="RubikCubeEngineTests"/>
+  </ItemGroup>
 </Project>

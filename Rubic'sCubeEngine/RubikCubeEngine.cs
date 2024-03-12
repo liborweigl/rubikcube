@@ -1,4 +1,4 @@
-using Rubic_sCubeEngine;
+using RubikCubeEngine;
 
 namespace RubikCubeEngine
 {

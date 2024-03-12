@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Rubik'sCube", "Rubik'sCube\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RubikCubeEngine", "Rubic'sCubeEngine\RubikCubeEngine.csproj", "{57515D70-1A22-4762-85E2-44C33FC8C460}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RubikCubeEngineTests", "RubikCubeEngineTests\RubikCubeEngineTests.csproj", "{BB90531C-D94D-40B0-BBC0-134B7488C4CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{57515D70-1A22-4762-85E2-44C33FC8C460}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57515D70-1A22-4762-85E2-44C33FC8C460}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57515D70-1A22-4762-85E2-44C33FC8C460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB90531C-D94D-40B0-BBC0-134B7488C4CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB90531C-D94D-40B0-BBC0-134B7488C4CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB90531C-D94D-40B0-BBC0-134B7488C4CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB90531C-D94D-40B0-BBC0-134B7488C4CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

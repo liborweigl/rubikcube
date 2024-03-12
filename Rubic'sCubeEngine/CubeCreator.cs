@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rubic_sCubeEngine
+namespace RubikCubeEngine
 {
     internal class CubeCreator : ICubeCreator
     {

@@ -1,4 +1,4 @@
-﻿namespace Rubic_sCubeEngine
+﻿namespace RubikCubeEngine
 {
     internal interface IFaceEdgeRotatorOperator
     {
