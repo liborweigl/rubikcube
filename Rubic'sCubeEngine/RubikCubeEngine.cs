@@ -1,3 +1,5 @@
+using Rubic_sCubeEngine;
+
 namespace RubikCubeEngine
 {
     public class RubikCubeEngine : IRubikCubeEngine
@@ -6,42 +8,27 @@ namespace RubikCubeEngine
         private string[,,] rubikCubeDefinition;
         private const int FaceSize = 6;
         private const int MatrixSize = 3;
+
+        private ICubeCreator CubeCreator;
         private IPrintService PrintService;
 
 
         public RubikCubeEngine()
         {
             PrintService = new PrintService();
-            rubikCubeDefinition = InitializeCube();
+            CubeCreator = new CubeCreator();
+
+            rubikCubeDefinition = CubeCreator.Create();
 
         }
 
         public RubikCubeEngine(int matrixSize)
         {
             PrintService = new PrintService();
-            rubikCubeDefinition = InitializeCube(matrixSize);
+            CubeCreator = new CubeCreator();
+
+            rubikCubeDefinition = CubeCreator.Create(FaceSize, matrixSize);
         }
-
-        private string[,,] InitializeCube(int matrixSize = 3)
-        {
-            rubikCubeDefinition = new string[FaceSize, matrixSize, matrixSize];
-
-            foreach (var cubeSideDefintion in CubeConfiguration.GetCubeDefintion())
-            {
-
-                for (int j = 0; j < matrixSize; j++)
-                {
-                    for (int k = 0; k < matrixSize; k++)
-                    {
-                        rubikCubeDefinition[(int)cubeSideDefintion.face, j, k] = cubeSideDefintion.color;
-                    }
-                }
-
-            }
-
-            return rubikCubeDefinition;
-        }
-
 
 
         public void RotateCubeNineteeDegreeClockwise(CubeFace cubeFace)
@@ -151,11 +138,8 @@ namespace RubikCubeEngine
             }
         }
 
-
         private void UpdateBottomEdges()
         {
-
-
             for (int i = 0; i < MatrixSize; i++)
             {
                 var temp = rubikCubeDefinition[(int)CubeFace.Left, i, 0];
@@ -166,11 +150,8 @@ namespace RubikCubeEngine
             }
         }
 
-
-
         private void UpdateLeftEdges()
         {
-
             for (int i = 0; i < MatrixSize; i++)
             {
                 var temp = rubikCubeDefinition[(int)CubeFace.Bottom, i, MatrixSize - 1];
@@ -183,8 +164,6 @@ namespace RubikCubeEngine
 
         private void UpdateRightEdges()
         {
-
-
             for (int i = 0; i < MatrixSize; i++)
             {
                 var temp = rubikCubeDefinition[(int)CubeFace.Bottom, MatrixSize - 1 - i, 0];
