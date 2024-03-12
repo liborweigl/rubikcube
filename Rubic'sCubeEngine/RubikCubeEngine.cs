@@ -34,7 +34,7 @@ namespace RubikCubeEngine
         public void RotateCubeNineteeDegreeClockwise(CubeFace cubeFace)
         {
             RotateFaceClockwise(cubeFace);
-            ApplyRotationOnEdgeFaces(cubeFace);
+            ApplyRotationOnFaceEdges(cubeFace);
 
         }
 
@@ -44,13 +44,13 @@ namespace RubikCubeEngine
 
             //we can rotate the face 3 times clockwise to achieve anticlockwise rotation
             RotateFaceClockwise(cubeFace);
-            ApplyRotationOnEdgeFaces(cubeFace);
+            ApplyRotationOnFaceEdges(cubeFace);
 
             RotateFaceClockwise(cubeFace);
-            ApplyRotationOnEdgeFaces(cubeFace);
+            ApplyRotationOnFaceEdges(cubeFace);
 
             RotateFaceClockwise(cubeFace);
-            ApplyRotationOnEdgeFaces(cubeFace);
+            ApplyRotationOnFaceEdges(cubeFace);
 
         }
 
@@ -75,32 +75,32 @@ namespace RubikCubeEngine
             }
         }
 
-        private void ApplyRotationOnEdgeFaces(CubeFace cubeFace)
+        private void ApplyRotationOnFaceEdges(CubeFace cubeFace)
         {
             switch (cubeFace)
             {
                 case CubeFace.Front:
-                    UpdateFrontFaceEdges();
+                    RotateFrontFaceEdges();
                     break;
                 case CubeFace.Bottom:
-                    UpdateBottomEdges();
+                    RotateBottomEdges();
                     break;
                 case CubeFace.Left:
-                    UpdateLeftEdges();
+                    RotateLeftEdges();
                     break;
                 case CubeFace.Right:
-                    UpdateRightEdges();
+                    RotateRightEdges();
                     break;
                 case CubeFace.Up:
-                    UpdateUpEdges();
+                    RotateUpEdges();
                     break;
                 case CubeFace.Down:
-                    UpdateDownEdges();
+                    RotateDownEdges();
                     break;
             }
         }
 
-        private void UpdateFrontFaceEdges()
+        private void RotateFrontFaceEdges()
         {
             for (int i = 0; i < MatrixSize; i++)
             {
@@ -112,7 +112,7 @@ namespace RubikCubeEngine
             }
         }
 
-        private void UpdateUpEdges()
+        private void RotateUpEdges()
         {
 
             for (int i = 0; i < MatrixSize; i++)
@@ -125,7 +125,7 @@ namespace RubikCubeEngine
             }
         }
 
-        private void UpdateDownEdges()
+        private void RotateDownEdges()
         {
 
             for (int i = 0; i < MatrixSize; i++)
@@ -138,7 +138,7 @@ namespace RubikCubeEngine
             }
         }
 
-        private void UpdateBottomEdges()
+        private void RotateBottomEdges()
         {
             for (int i = 0; i < MatrixSize; i++)
             {
@@ -150,7 +150,7 @@ namespace RubikCubeEngine
             }
         }
 
-        private void UpdateLeftEdges()
+        private void RotateLeftEdges()
         {
             for (int i = 0; i < MatrixSize; i++)
             {
@@ -162,7 +162,7 @@ namespace RubikCubeEngine
             }
         }
 
-        private void UpdateRightEdges()
+        private void RotateRightEdges()
         {
             for (int i = 0; i < MatrixSize; i++)
             {
