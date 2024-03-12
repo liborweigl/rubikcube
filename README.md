@@ -1,7 +1,7 @@
 # rubikcube
-Todo
-Add UnitTest
-Use Dependency injection
+Todo:
+Add UnitTest,
+Use Dependency injection,
 Refactor code
 
 #How to build the solution
