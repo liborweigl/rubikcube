@@ -13,11 +13,11 @@ namespace RubikCubeEngine
         {
             for (int i = 0; i < matrixSize; i++)
             {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Up, matrixSize - 1, i];
+                var rotatedField = rubikCubeConfigurationState[(int)CubeFace.Up, matrixSize - 1, i];
                 rubikCubeConfigurationState[(int)CubeFace.Up, matrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Left, matrixSize - 1 - i, matrixSize - 1];
                 rubikCubeConfigurationState[(int)CubeFace.Left, matrixSize - 1 - i, matrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, 0, matrixSize - 1 - i];
                 rubikCubeConfigurationState[(int)CubeFace.Down, 0, matrixSize - 1 - i] = rubikCubeConfigurationState[(int)CubeFace.Right, i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Right, i, 0] = temp;
+                rubikCubeConfigurationState[(int)CubeFace.Right, i, 0] = rotatedField;
             }
         }
 
@@ -26,11 +26,11 @@ namespace RubikCubeEngine
 
             for (int i = 0; i < matrixSize; i++)
             {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Left, 0, i];
+                var rotatedField = rubikCubeConfigurationState[(int)CubeFace.Left, 0, i];
                 rubikCubeConfigurationState[(int)CubeFace.Left, 0, i] = rubikCubeConfigurationState[(int)CubeFace.Front, 0, i];
                 rubikCubeConfigurationState[(int)CubeFace.Front, 0, i] = rubikCubeConfigurationState[(int)CubeFace.Right, 0, i];
                 rubikCubeConfigurationState[(int)CubeFace.Right, 0, i] = rubikCubeConfigurationState[(int)CubeFace.Bottom, 0, i];
-                rubikCubeConfigurationState[(int)CubeFace.Bottom, 0, i] = temp;
+                rubikCubeConfigurationState[(int)CubeFace.Bottom, 0, i] = rotatedField;
             }
         }
 
@@ -39,11 +39,11 @@ namespace RubikCubeEngine
 
             for (int i = 0; i < matrixSize; i++)
             {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Bottom, matrixSize - 1, i];
+                var rotatedField = rubikCubeConfigurationState[(int)CubeFace.Bottom, matrixSize - 1, i];
                 rubikCubeConfigurationState[(int)CubeFace.Bottom, matrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Right, matrixSize - 1, i];
                 rubikCubeConfigurationState[(int)CubeFace.Right, matrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Front, matrixSize - 1, i];
                 rubikCubeConfigurationState[(int)CubeFace.Front, matrixSize - 1, i] = rubikCubeConfigurationState[(int)CubeFace.Left, matrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Left, matrixSize - 1, i] = temp;
+                rubikCubeConfigurationState[(int)CubeFace.Left, matrixSize - 1, i] = rotatedField;
             }
         }
 
@@ -51,11 +51,11 @@ namespace RubikCubeEngine
         {
             for (int i = 0; i < matrixSize; i++)
             {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Left, i, 0];
+                var rotatedField = rubikCubeConfigurationState[(int)CubeFace.Left, i, 0];
                 rubikCubeConfigurationState[(int)CubeFace.Left, i, 0] = rubikCubeConfigurationState[(int)CubeFace.Up, 0, matrixSize - 1 - i];
                 rubikCubeConfigurationState[(int)CubeFace.Up, 0, matrixSize - 1 - i] = rubikCubeConfigurationState[(int)CubeFace.Right, matrixSize - 1 - i, matrixSize - 1];
                 rubikCubeConfigurationState[(int)CubeFace.Right, matrixSize - 1 - i, matrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, matrixSize - 1, i];
-                rubikCubeConfigurationState[(int)CubeFace.Down, matrixSize - 1, i] = temp;
+                rubikCubeConfigurationState[(int)CubeFace.Down, matrixSize - 1, i] = rotatedField;
             }
         }
 
@@ -63,11 +63,11 @@ namespace RubikCubeEngine
         {
             for (int i = 0; i < matrixSize; i++)
             {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Bottom, i, matrixSize - 1];
+                var rotatedField = rubikCubeConfigurationState[(int)CubeFace.Bottom, i, matrixSize - 1];
                 rubikCubeConfigurationState[(int)CubeFace.Bottom, i, matrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, matrixSize - 1 - i, 0];
                 rubikCubeConfigurationState[(int)CubeFace.Down, matrixSize - 1 - i, 0] = rubikCubeConfigurationState[(int)CubeFace.Front, matrixSize - 1 - i, 0];
                 rubikCubeConfigurationState[(int)CubeFace.Front, matrixSize - 1 - i, 0] = rubikCubeConfigurationState[(int)CubeFace.Up, matrixSize - 1 - i, 0];
-                rubikCubeConfigurationState[(int)CubeFace.Up, matrixSize - 1 - i, 0] = temp;
+                rubikCubeConfigurationState[(int)CubeFace.Up, matrixSize - 1 - i, 0] = rotatedField;
             }
         }
 
@@ -75,11 +75,11 @@ namespace RubikCubeEngine
         {
             for (int i = 0; i < matrixSize; i++)
             {
-                var temp = rubikCubeConfigurationState[(int)CubeFace.Bottom, matrixSize - 1 - i, 0];
+                var rotatedField = rubikCubeConfigurationState[(int)CubeFace.Bottom, matrixSize - 1 - i, 0];
                 rubikCubeConfigurationState[(int)CubeFace.Bottom, matrixSize - 1 - i, 0] = rubikCubeConfigurationState[(int)CubeFace.Up, i, matrixSize - 1];
                 rubikCubeConfigurationState[(int)CubeFace.Up, i, matrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Front, i, matrixSize - 1];
                 rubikCubeConfigurationState[(int)CubeFace.Front, i, matrixSize - 1] = rubikCubeConfigurationState[(int)CubeFace.Down, i, matrixSize - 1];
-                rubikCubeConfigurationState[(int)CubeFace.Down, i, matrixSize - 1] = temp;
+                rubikCubeConfigurationState[(int)CubeFace.Down, i, matrixSize - 1] = rotatedField;
             }
         }
 
