@@ -1,6 +1,6 @@
 ﻿namespace RubikCubeEngine
 {
-    internal interface IFaceEdgeRotatorOperator
+    internal interface IFaceEdgeRotator
     {
         void RotateBottomEdges(string[,,] rubikCubeConfigurationState, int matrixSize);
         void RotateDownEdges(string[,,] rubikCubeConfigurationState, int matrixSize);

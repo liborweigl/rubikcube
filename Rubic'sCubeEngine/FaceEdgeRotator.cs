@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RubikCubeEngine
 {
-    internal class FaceEdgeRotatorOperator : IFaceEdgeRotatorOperator
+    internal class FaceEdgeRotator : IFaceEdgeRotator
     {
         public void RotateFrontFaceEdges(string[,,] rubikCubeConfigurationState, int matrixSize)
         {

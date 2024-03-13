@@ -11,14 +11,16 @@ namespace RubikCubeEngine
 
         private ICubeCreator CubeCreator;
         private IPrintService PrintService;
-        private IFaceEdgeRotatorOperator FaceEdgeRotatorOperator;
+        private IFaceEdgeRotator FaceEdgeRotator;
+        private IFaceRotator FaceRotator;
 
 
         public RubikCubeEngine()
         {
             PrintService = new PrintService();
             CubeCreator = new CubeCreator();
-            FaceEdgeRotatorOperator = new FaceEdgeRotatorOperator();
+            FaceEdgeRotator = new FaceEdgeRotator();
+            FaceRotator = new FaceRotator();
 
             rubikCubeConfigurationState = CubeCreator.Create();
 
@@ -28,7 +30,8 @@ namespace RubikCubeEngine
         {
             PrintService = new PrintService();
             CubeCreator = new CubeCreator();
-            FaceEdgeRotatorOperator = new FaceEdgeRotatorOperator();
+            FaceEdgeRotator = new FaceEdgeRotator();
+            FaceRotator = new FaceRotator();
 
             rubikCubeConfigurationState = CubeCreator.Create(FaceSize, matrixSize);
         }
@@ -36,46 +39,22 @@ namespace RubikCubeEngine
 
         public void RotateCubeNineteeDegreeClockwise(CubeFace cubeFace)
         {
-            RotateFaceClockwise(cubeFace);
+            rubikCubeConfigurationState = FaceRotator.RotateFaceClockwise(rubikCubeConfigurationState, MatrixSize, cubeFace);
             ApplyRotationOnFaceEdges(cubeFace);
-
         }
-
 
         public void RotateCubeNineteeDegreeAntiClockwise(CubeFace cubeFace)
         {
 
             //we can rotate the face 3 times clockwise to achieve anticlockwise rotation
-            RotateFaceClockwise(cubeFace);
+            rubikCubeConfigurationState = FaceRotator.RotateFaceClockwise(rubikCubeConfigurationState, MatrixSize, cubeFace);
             ApplyRotationOnFaceEdges(cubeFace);
 
-            RotateFaceClockwise(cubeFace);
+            rubikCubeConfigurationState = FaceRotator.RotateFaceClockwise(rubikCubeConfigurationState, MatrixSize, cubeFace);
             ApplyRotationOnFaceEdges(cubeFace);
 
-            RotateFaceClockwise(cubeFace);
+            rubikCubeConfigurationState = FaceRotator.RotateFaceClockwise(rubikCubeConfigurationState, MatrixSize, cubeFace);
             ApplyRotationOnFaceEdges(cubeFace);
-
-        }
-
-        private void RotateFaceClockwise(CubeFace cubeFace)
-        {
-            string[,] rotatedFace = new string[MatrixSize, MatrixSize];
-
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                for (int j = 0; j < MatrixSize; j++)
-                {
-                    rotatedFace[i, j] = rubikCubeConfigurationState[(int)cubeFace, MatrixSize - 1 - j, i];
-                }
-            }
-
-            for (int i = 0; i < MatrixSize; i++)
-            {
-                for (int j = 0; j < MatrixSize; j++)
-                {
-                    rubikCubeConfigurationState[(int)cubeFace, i, j] = rotatedFace[i, j];
-                }
-            }
         }
 
         private void ApplyRotationOnFaceEdges(CubeFace cubeFace)
@@ -83,26 +62,25 @@ namespace RubikCubeEngine
             switch (cubeFace)
             {
                 case CubeFace.Front:
-                    FaceEdgeRotatorOperator.RotateFrontFaceEdges(rubikCubeConfigurationState, MatrixSize);
+                    FaceEdgeRotator.RotateFrontFaceEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Bottom:
-                    FaceEdgeRotatorOperator.RotateBottomEdges(rubikCubeConfigurationState, MatrixSize);
+                    FaceEdgeRotator.RotateBottomEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Left:
-                    FaceEdgeRotatorOperator.RotateLeftEdges(rubikCubeConfigurationState, MatrixSize);
+                    FaceEdgeRotator.RotateLeftEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Right:
-                    FaceEdgeRotatorOperator.RotateRightEdges(rubikCubeConfigurationState, MatrixSize);
+                    FaceEdgeRotator.RotateRightEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Up:
-                    FaceEdgeRotatorOperator.RotateUpEdges(rubikCubeConfigurationState, MatrixSize);
+                    FaceEdgeRotator.RotateUpEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
                 case CubeFace.Down:
-                    FaceEdgeRotatorOperator.RotateDownEdges(rubikCubeConfigurationState, MatrixSize);
+                    FaceEdgeRotator.RotateDownEdges(rubikCubeConfigurationState, MatrixSize);
                     break;
             }
         }
-
 
         public void PrintRubikCube()
         {
